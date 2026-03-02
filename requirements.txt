@@ -1,9 +1,8 @@
-kneed==2.3.1
-numpy==1.26.4
-pandas==2.2.2
-openai==1.50.1
-python-dotenv==1.0.1
-beautifulsoup4==4.12.3
-tqdm==4.66.5
-openpyxl==3.1.5
-matplotlib==3.10.8
+numpy
+pandas
+openai
+python-dotenv
+beautifulsoup4
+tqdm
+openpyxl
+matplotlib
