@@ -2,10 +2,7 @@
 
 This repository contains the dataset, methodology, and pipeline used for our research to define a comprehensive, language-agnostic taxonomy of software energy smells. It tracks energy inefficiencies from the root cause (sub-category) to a broader energy smell (category) and validates this using execution energy profiling and LLM-based classification.
 
----
-
-<details>
-<summary><strong>Directory Structure</strong></summary>
+## Directory Structure
 
 <pre>
 Energy-Smells
@@ -27,10 +24,6 @@ Energy-Smells
 │   ├── <a href="literature_review_results/v6_annotator2_opencoding.xlsx">v6_annotator2_opencoding.xlsx</a>
 │   ├── <a href="literature_review_results/v7_energy_smells_taxonomy.xlsx">v7_energy_smells_taxonomy.xlsx</a>
 │   └── <a href="literature_review_results/v7_energy_smells_taxonomy_python_desc.xlsx">v7_energy_smells_taxonomy_python_desc.xlsx</a>
-├── <a href="analysis/">analysis/</a>                       # Replication package: analysis script + dataset + generated results
-│   ├── <a href="analysis/analysis.py">analysis.py</a>                 # Full quantitative analysis and plot generation
-│   ├── <a href="analysis/classified_smells_final.jsonl">classified_smells_final.jsonl</a> # Final classified dataset (3,000 pairs)
-│   └── <a href="analysis/result/">result/</a>                     # Auto-generated: plots (.png/.pdf) + analysis_results.txt
 ├── <a href="energy_results.jsonl">energy_results.jsonl</a>            # Intermediate dataset with energy measurements
 ├── <a href="energy_smells_taxonomy.xlsx">energy_smells_taxonomy.xlsx</a>     # Final defined taxonomy
 ├── <a href="filter_significant_energy.py">filter_significant_energy.py</a>    # Script to isolate pairs with high energy divergence
@@ -40,16 +33,11 @@ Energy-Smells
 ├── <a href="test_runner.py">test_runner.py</a>                  # Wrapper script to execute tests iteratively
 ├── <a href="train.jsonl">train.jsonl</a>                     # Input list of problem pairs from Pie-Perf dataset
 ├── <a href="validate_correctness.py">validate_correctness.py</a>         # Script to ensure functional equivalence of code pairs
-├── <a href="validated_train.jsonl">validated_train.jsonl</a>           # Validation outputs
+├── <a href="validated_train.jsonl">validated_train.jsonl</a>  # Validation outputs
 └── <a href="warmup.py">warmup.py</a>                       # Helper script to busy-wait the CPU before profiling
 </pre>
 
-</details>
-
----
-
-<details>
-<summary><strong>Methodology Overview</strong></summary>
+## Methodology Overview
 
 The primary objective of this project is to categorize inefficiencies into a two-level hierarchy mapping:
 1. **Energy Smell (Category)**: High-level observable patterns of resource waste that occur without altering the program's correctness.
@@ -62,12 +50,7 @@ The `literature_review_results/` folder captures the rigorous 5-phase systematic
 - **Phase 4 (`v6_1`, `v6_2`)**: Qualitative coding to distill 320 remaining patterns down to their fundamental root causes via open and axial coding.
 - **Phase 5 (`v7`)**: Taxonomy conflict resolution. The final result is a taxonomy comprising 12 top-level Energy Smells and 65 underlying Root Causes.
 
-</details>
-
----
-
-<details>
-<summary><strong>Pipeline Usage &amp; Replication</strong></summary>
+## Pipeline Usage & Replication
 
 Follow these steps sequentially to replicate the dataset validation, measurement, and classification mechanisms:
 
@@ -91,7 +74,7 @@ Profile the validated code snippets to gather actual energy usage metrics.
 ```bash
 python measure_energy.py
 ```
-**What this does**: Reads the functionally validated pairs. For each program, it performs a CPU warm-up (using `warmup.py`), and executes the snippets iteratively (via `test_runner.py`) wrapping them within the Linux `perf stat` (extracting `energy-pkg` and `energy-ram` Joules) and `/usr/bin/time -v` (extracting Maximum Resident Set Size). Results are appended to `energy_results.jsonl`.
+**What this does**: Reads the functionally validated pairs. For each program, it performs a CPU warm-up (using `warmup.py`), and executes the snippets iteratively (via `test_runner.py`) wrapping them within the Linux `perf stat` (extracting `energy-pkg` and `energy-ram` Joules) and `/usr/bin/time -v` (extracting Maximum Resident Set Size). Results are appended to `energy_results.jsonl`. 
 
 *(Note: Depending on your system configuration, utilizing `perf stat` for hardware energy events might require administrative privileges or kernel parameter adjustments).*
 
@@ -107,7 +90,7 @@ python filter_significant_energy.py
 ```
 **What this does**: Reads `energy_results.jsonl` into a Pandas DataFrame, calculates the absolute energy difference ($\Delta Energy$), and retains the top 3,000 thresholded pairs. This process guarantees extreme deviations are highlighted, writing the trimmed rows into `significant_energy_diff.jsonl`.
 
-**Dataset Fields Added**:
+**Dataset Fields Added**: 
 - `unique_index`: A persistent ID mapping back to the row index of `energy_results.jsonl`.
 
 ### 4. Classify Energy Smells via LLM
@@ -131,20 +114,7 @@ Classification responses and AI rationale strings stream directly into `.jsonl` 
 - `final_classification`: The conclusive list of predicted Root Cause subcategories (e.g., `["C1.S2", "C3.S1"]`).
 - You can inspect the details of expected fields generated by LLMs in `energy_smell_classifier/prompts.py`.
 
-### 5. Run Analysis & Generate Plots
-Reproduce all quantitative findings and figures from the manuscript.
-```bash
-cd analysis
-python analysis.py
-```
-**What this does**: Loads `classified_smells_final.jsonl`, computes all statistics reported in the manuscript, and saves results to `result/analysis_results.txt` and 11 publication-ready plots (PNG + PDF).
-
-</details>
-
----
-
-<details>
-<summary><strong>Dataset Availability</strong></summary>
+## Dataset Availability
 
 The public version of our dataset, containing our newly appended fields, is available for download here: [**[Temporary Dataset Link (TODO)]**](#)
 
@@ -152,15 +122,6 @@ The dataset is provided in three ascending tiers of refinement:
 1. `public_validated_energy_results.jsonl`: Contains all **21,428** problem pairs that successfully passed our functional equivalence test and were successfully profiled for energy, time, and memory consumption.
 2. `public_significant_energy_diff.jsonl`: A filtered subset containing the top **3,000** pairs from the previous step that exhibited the highest absolute difference in energy consumption.
 3. `public_classified_smells.jsonl`: The final **3,000** pairs from the significant difference tier, fully annotated with multi-step DeepSeek LLM reasoning, root causes, and final taxonomy subcategory classifications.
-   - Note: Any field except `user_id`, `problem_id`, `language`, `submission_id_v0`, `submission_id_v1`, `code_v0_no_empty_lines`, `code_v1_no_empty_lines` is generated by our pipeline.
-
-</details>
-
----
-
-<details>
-<summary><strong>Credits</strong></summary>
-
+- Note: Any field except `user_id`, `problem_id`, `language`, `submission_id_v0`, `submission_id_v1`, `code_v0_no_empty_lines`, `code_v1_no_empty_lines` is generated by our pipeline.
+## Credits
 Our dataset extends the [Pie-Perf dataset](https://github.com/madaan/pie-perf?tab=readme-ov-file)---the python split [`train.jsonl`](https://drive.google.com/file/d/1ec8eOWgnBrzy2HlNDlTX6iURwQcIxDXH/view), which provides a rich collection of paired efficient and inefficient algorithmic implementations. While we retained their original paired snippet representations and problem descriptions, we expanded upon the dataset by profiling execution on hardware to measure and append our newly extracted `energy`, `time`, and `memory` metrics, alongside rigorous LLM-generated taxonomy classifications.
-
-</details>
