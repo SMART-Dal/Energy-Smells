@@ -6,7 +6,7 @@ samples_classification/
 organize_classified_smells.py
 simulate_prompts.py
 *log*.txt
-dataset_preparation/
+dataset/
 
 # Created by https://www.toptal.com/developers/gitignore/api/python,visualstudiocode,jupyternotebooks
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,visualstudiocode,jupyternotebooks

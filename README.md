@@ -26,6 +26,10 @@ Energy-Smells
 │   ├── <a href="literature_review_results/v6_annotator2_opencoding.xlsx">v6_annotator2_opencoding.xlsx</a>
 │   ├── <a href="literature_review_results/v7_energy_smells_taxonomy.xlsx">v7_energy_smells_taxonomy.xlsx</a>
 │   └── <a href="literature_review_results/v7_energy_smells_taxonomy_python_desc.xlsx">v7_energy_smells_taxonomy_python_desc.xlsx</a>
+├── <a href="dataset/">dataset/</a>                        # Prepared public dataset ready for sharing
+│   ├── <a href="dataset/public_classified_smells.jsonl">public_classified_smells.jsonl</a> # Public version of the classified dataset
+│   ├── <a href="dataset/public_significant_energy_diff.jsonl">public_significant_energy_diff.jsonl</a> # Public version of significant energy diffs
+│   └── <a href="dataset/public_validated_energy_results.jsonl">public_validated_energy_results.jsonl</a> # Public version of energy measurements
 ├── <a href="energy_results.jsonl">energy_results.jsonl</a>            # Intermediate dataset with energy measurements
 ├── <a href="taxonomy.md">taxonomy.md</a>                     # Full taxonomy: all 12 categories and 65 subcategories with descriptions
 ├── <a href="energy_smells_taxonomy.xlsx">energy_smells_taxonomy.xlsx</a>     # Final defined taxonomy
@@ -40,8 +44,8 @@ Energy-Smells
 ├── <a href="warmup.py">warmup.py</a>                       # Helper script to busy-wait the CPU before profiling
 └── <a href="analysis/">analysis/</a>                       # Replication package: analysis script + dataset + generated results
     ├── <a href="analysis/analysis.py">analysis.py</a>                 # Full quantitative analysis and plot generation
-    ├── <a href="analysis/classified_smells_final.jsonl">classified_smells_final.jsonl</a> # Final classified dataset (3,000 pairs)
     └── <a href="analysis/result/">result/</a>                     # Auto-generated: plots (.png/.pdf) + analysis_results.txt
+        └── <a href="analysis/result/classification_both_annotators_validation.xlsx">classification_both_annotators_validation.xlsx</a> # Validation of pipeline classification by both annotators
 </pre>
 
 ## Methodology Overview
