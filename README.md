@@ -62,7 +62,7 @@ Energy-Smells
 └── <a href="analysis/">analysis/</a>                       # Replication package: analysis script + dataset + generated results
     ├── <a href="analysis/analysis.py">analysis.py</a>                 # Full quantitative analysis and plot generation
     └── <a href="analysis/result/">result/</a>                     # Auto-generated: plots (.png/.pdf) + analysis_results.txt
-        └── <a href="analysis/result/classification_both_annotators_validation.xlsx">classification_both_annotators_validation.xlsx</a> # Validation of pipeline classification by both annotators
+        └── <a href="analysis/result/classification_both_annotators_validations.xlsx">classification_both_annotators_validations.xlsx</a> # Validation of pipeline classification by both annotators
 </pre>
 
 ## Methodology Overview
