@@ -1,5 +1,22 @@
 # Energy-Smells Taxonomy and Classification
 
+> **Abstract**
+> As software proliferates across domains, its aggregate energy footprint has become a major concern. To reduce software's growing environmental footprint, developers need to identify and refactor *energy smells*: source code implementations, design choices, or programming practices that lead to inefficient use of computing resources. Existing catalogs of such smells are either domain-specific, limited to performance anti-patterns, lack fine-grained root cause classification, or remain unvalidated against measured energy data. In this paper, we present a comprehensive, language-agnostic, taxonomy of software energy smells. Through a systematic literature review of 60 papers and exhaustive snowballing, we coded 320 inefficiency patterns into 12 primary energy smells and 65 root causes mapped to the primary smells. To empirically validate this taxonomy, we profile over 21,000 functionally equivalent Python code pairs for energy, time, and memory, and classified the top 3,000 pairs by energy difference using a multi-step LLM pipeline, mapping 55 of the 65 root causes to real code. The analysis reveals that 71% of samples exhibit multiple co-occurring smells, memory-related smells yield the highest per-fix energy savings, while power draw variation across patterns confirms that energy optimization cannot be reduced to performance optimization alone. Along with the taxonomy, we release the labeled dataset, including energy profiles and reasoning traces, to the community. Together, they provide a shared vocabulary, actionable refactoring guidelines, and an empirical foundation for energy smell detection, energy-efficient code generation, and green software engineering at large.
+
+---
+
+**Figure: Study Overview**
+
+![Study Overview](analysis/overview_page.jpg)
+
+---
+
+**Distribution of energy smell categories and subcategories across 3,000 classified code pairs:**
+
+<img src="analysis/plot_pie_best_page.jpg" width="75%" alt="Energy smell category and subcategory distribution"/>
+
+---
+
 This repository contains the dataset, methodology, and pipeline used for our research to define a comprehensive, language-agnostic taxonomy of software energy smells. It tracks energy inefficiencies from the root cause (sub-category) to a broader energy smell (category) and validates this using execution energy profiling and LLM-based classification.
 
 **Taxonomy reference:** The full taxonomy — all 12 categories and 65 subcategories with descriptions and examples — is documented in [taxonomy.md](taxonomy.md).
