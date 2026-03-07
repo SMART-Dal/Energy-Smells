@@ -135,8 +135,6 @@ python analysis.py
 
 ## Dataset Availability
 
-The public version of our dataset, containing our newly appended fields, is available for download here: [**[Temporary Dataset Link (TODO)]**](#)
-
 The dataset is provided in three ascending tiers of refinement:
 1. `public_validated_energy_results.jsonl`: Contains all **21,428** problem pairs that successfully passed our functional equivalence test and were successfully profiled for energy, time, and memory consumption.
 2. `public_significant_energy_diff.jsonl`: A filtered subset containing the top **3,000** pairs from the previous step that exhibited the highest absolute difference in energy consumption.
