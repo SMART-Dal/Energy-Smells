@@ -151,6 +151,7 @@ python analysis.py
 **What this does**: Loads `classified_smells_final.jsonl`, computes all statistics reported in the manuscript, and saves results to `result/analysis_results.txt` along with publication-ready plots (PNG + PDF) in `result/`.
 
 ## Dataset Availability
+This repository dataset can be found at [Zenodo](https://zenodo.org/records/18896366)
 
 The dataset is provided in three ascending tiers of refinement:
 1. `public_validated_energy_results.jsonl`: Contains all **21,428** problem pairs that successfully passed our functional equivalence test and were successfully profiled for energy, time, and memory consumption.
